@@ -305,7 +305,7 @@ class Twarc(object):
             params['cursor'] = user_ids['next_cursor']
 
     @filter_protected
-    def filter(self, track=None, follow=None, locations=None, event=None,
+    def filter(self, track=None, follow=None, locations=None, event=None, languages=None,
                record_keepalive=False):
         """
         Returns an iterator for tweets that match a given filter track from
@@ -314,6 +314,10 @@ class Twarc(object):
         If a threading.Event is provided for event and the event is set,
         the filter will be interrupted.
         """
+        if languages is not None:
+            if type(languages) == list:
+                languages = ','.join(languages)
+
         if locations is not None:
             if type(locations) == list:
                 locations = ','.join(locations)
